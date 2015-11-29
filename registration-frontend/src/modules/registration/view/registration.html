@@ -1,0 +1,95 @@
+<div ng-controller="RegistrationController">
+
+	<form name="registerForm" class="registration-form">
+
+		<div class="row feedback">
+			
+			<div class="loader-container">
+				<span ng-show="state === states.loading" class="loader"></span>
+			</div>
+
+			<!-- Server errors -->
+			<div ng-show="state === states.error">
+				<div ng-show="errorMessages.length === 0">
+					There was an error connecting to the server
+				</div>
+
+				<div ng-show="errorMessages.length > 0">
+					<p>Server responded with the following messages:</p>
+					<div class="error" ng-repeat="message in errorMessages">
+						<span class="glyphicon glyphicon-remove"></span>
+						{{message}}
+					</div>
+				</div>
+			</div>
+
+			<!-- Frontend feedback -->
+			<div ng-show="registerForm.username.$error.pattern">
+				<span class="glyphicon glyphicon-remove"></span>
+				Username should be 5 or more characters long, contain only letters or digits
+			</div>
+
+			<div ng-show="registerForm.password.$error.pattern">
+				<span class="glyphicon glyphicon-remove"></span>
+				Password should be 8 or more characters long, and consist of at least one digit, one uppercase, and one lowercase letters
+			</div>
+
+			<div ng-show="!passwordsMatch()">
+				<span class="glyphicon glyphicon-remove"></span>
+				Paswords don't match
+			</div>
+
+			<!-- Success -->
+			<div class="success" ng-show="state === states.success">
+				<span class="glyphicon glyphicon-success"></span>
+				The new user has been successfully registered!
+			</div>
+
+		</div>
+		
+		<!-- Form -->
+		<div class="row pull-left input-fields">
+
+			<div class="col-md12">
+				<div class="input-field">
+					<div class="col-md-6">
+						<label>Username:</label>
+					</div>
+					<div class="col-md-6">
+						<input name="username" type="text" ng-model="user.username" ng-minlength="5" ng-pattern="/^[0-9,a-z,A-Z]{5,}$/" required>
+					</div>
+				</div>
+
+				<div class="input-field">
+					<div class="col-md-6">
+						<label>Password:</label>
+					</div>
+					<div class="col-md-6">
+						<input name="password" type="password" ng-model="user.password" ng-minlength="8" ng-pattern="/^[0-9,a-z,A-Z]{8,}$/" required>
+					</div>
+				</div>
+
+				<div class="input-field">
+					<div class="col-md-6">
+						<label>Repeat password:</label>
+					</div>
+					<div class="col-md-6">
+						<input id="repeatedPassword" type="password" ng-model="user.repeatedPassword" required>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Submit button -->
+		<div class="row buttons">
+			<div class="col-md-12">
+				<button classs="btn btn-small" ng-click="register()" ng-disabled="registerForm.$invalid || !passwordsMatch()">
+					Register
+				</button>
+			</div>
+		</div>
+
+	</form>
+
+</div>

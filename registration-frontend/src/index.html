@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="Registration">
+
+    <head>
+        <title>Registration</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="./css/style.css">
+
+        <!-- Bower -->
+        <script src="bower_components/angular/angular.js"></script>
+        
+        <!-- Config -->
+        <script src="config/Config.js"></script>
+        <script src="config/Constants.js"></script>
+
+        <!-- Registration -->
+        <script src="modules/registration/view/RegistrationController.js"></script>       
+        <script src="modules/registration/service/RegistrationService.js"></script>
+
+    </head>
+
+    <body>
+
+        <!-- Main view -->
+        <div class="row">
+
+            <div class="col-md-offset-4 col-md-4 col-sm-12">
+                <div ng-include="'/modules/registration/view/registration.html'"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
